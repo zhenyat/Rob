@@ -9,7 +9,7 @@ from tkinter import *
 
 import controllers.gpio  as gpio
 
-class AppView():
+class DemoView():
     def __init__(self, master, config, models):
         self.master = master
         self.config = config

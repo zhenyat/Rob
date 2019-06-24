@@ -5,12 +5,10 @@
 #
 #   22.06.2019  Created by: zhenya
 ################################################################################
-from tkinter import *
-
 from config.app_config import *
 from config.app_models import *
-from lib               import *
 from views.demo        import *
+from views.robot       import *
 
 
 class Application:
@@ -19,4 +17,9 @@ class Application:
         models = AppModels(config)
 
         self.root = Tk()
-        AppView(self.root, config, models)
+        
+        if config.demo:
+            DemoView(self.root, config, models)
+        else:
+            RobotView(self.root, config, models)
+            

@@ -6,7 +6,7 @@
 #   23.06.2019  Created by: zhenya
 ################################################################################
 import gpiozero as GPIO
-from lib.tools import debug
+#from lib.tools import debug
 
 class AppModels():
   def __init__(self, config):
@@ -19,6 +19,5 @@ class AppModels():
         self.motor_right = GPIO.Motor(forward=config.motor_right_forward, backward=config.motor_right_backward, pin_factory=config.factory)
         
     else:
-        self.robot = GPIO.Robot(left=(config.motor_left_forward,    config.motor_left_backward),
-                           right=(config.motor_right_forward, config.motor_right_backward), pin_factory=config.factory)
-        
+        self.robot = GPIO.Robot(left=(config.motor_left_forward,   config.motor_left_backward),
+                                right=(config.motor_right_forward, config.motor_right_backward), pin_factory=config.factory)

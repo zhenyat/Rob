@@ -5,13 +5,13 @@
 #
 #   22.06.2019  Created by: zhenya
 ################################################################################
-from   time    import sleep
-from   tkinter import END
+from   time      import sleep
 import pigpio
 
+from   lib.tools import *
+
 def button(button, out_box):
-    out_box.delete(1.0, END)
-    report(out_box, '===== Button Demo')
+    report(out_box, '===== Button Demo', True)
     
     for i in range(10):
         if button.is_pressed:
@@ -24,8 +24,7 @@ def button(button, out_box):
     report(out_box, "===== End Demo")
 
 def led_blink(led, out_box):
-    out_box.delete(1.0, END)
-    report(out_box, '===== LED Blinking')
+    report(out_box, '===== LED Blinking', True)
 
     for i in range(4):
         report(out_box, "    LED is ON")
@@ -38,8 +37,7 @@ def led_blink(led, out_box):
     report(out_box, "===== End Demo")
 
 def led_by_button(button, led, out_box):
-    out_box.delete(1.0, END)
-    report(out_box, '===== LED by button')
+    report(out_box, '===== LED by button', True)
 
     for i in range(6):
         if button.is_pressed:
@@ -55,8 +53,7 @@ def led_by_button(button, led, out_box):
     report(out_box, "===== End Demo")
 
 def motors(motor_left, motor_right, speed, out_box):
-    out_box.delete(1.0, END)
-    report(out_box, '===== Motors Demo')
+    report(out_box, '===== Motors Demo', True)
 
     report(out_box, '    Left motor forward')
     motor_left.forward(speed)
@@ -87,8 +84,7 @@ def motors(motor_left, motor_right, speed, out_box):
 #   For better demo-effect the LED pin to be used
 #################################################
 def pigpio_toggle(host_addr, gpio_pin, out_box):
-    out_box.delete(1.0, END)
-    report(out_box, '===== pigpio Lib Demo')
+    report(out_box, '===== pigpio Lib Demo', True)
 
     pi = pigpio.pi(host_addr)
 
@@ -102,11 +98,3 @@ def pigpio_toggle(host_addr, gpio_pin, out_box):
         sleep(2)
 
     report(out_box, "===== End Demo")
-
-#################################################
-#   Reports to the output widget
-#################################################
-def report(out_box, text):
-    out_box.insert(END, text + '\n')
-    out_box.update()
-

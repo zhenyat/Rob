@@ -11,7 +11,7 @@ host:
 
 # Modes
 debug:                  True
-demo:                   True
+demo:                   False
 
 # Models
 button:
