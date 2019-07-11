@@ -2,32 +2,46 @@
 #   Input file for App configuration
 #
 #   22.06.2019  Created by: zhenya
+#   10.07.2019  Update: new data structure of LEDs & Buttons
 ###############################################################
 host:
     addr:               '192.168.2.44'
     name:               'raspberrypi'
     user:               'pi'
-    test:               True
+    test:               False
 
 # Modes
 debug:                  True
 demo:                   True
 
 # Models
-button:
-    gpio:               17
-
-led:
-    gpio:               27
-
+buttons:
+    -
+        name:           'demo_button'
+        color:          'red'
+        gpio:           17
+    -
+        name:           'dummy_button'
+        color:          'yellow'
+        gpio:           20
+leds:
+    -
+        color:          'red'
+        gpio:            27
+    -
+        color:          'yellow'
+        gpio:            26
 motors:
-    left:
-        forward_gpio:   19
-        backward_gpio:  16
-    right:
-        forward_gpio:   22
-        backward_gpio:  23
-    speed:              1.0
+    -
+        kind:               left
+        forward_gpio:       19
+        backward_gpio:      16
+        speed:              1.0
+    -
+        kind:               right
+        forward_gpio:       22
+        backward_gpio:      23
+        speed:              1.0
 
 pigpio:
     gpio:               27
