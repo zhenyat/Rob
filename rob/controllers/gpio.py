@@ -4,49 +4,58 @@
 #   GPIO Demo / Tests Controller
 #
 #   22.06.2019  Created by: zhenya
+#   13.07.2019  Updated for Models
 ################################################################################
 from   time      import sleep
 import pigpio
 
 from   lib.tools import *
 
-def button(button, out_box):
-    report(out_box, '===== Button Demo', True)
+def button(buttons, out_box):
+    report(out_box, '===== Buttons Demo', True)
     
-    for i in range(10):
-        if button.is_pressed:
-            report(out_box, "    %i: Button is ON" %i)
-            sleep(1)
-        else:
-            report(out_box, "    %i: Button is OFF" %i)
-            sleep(1)
+    for button in buttons:
+        report(out_box, "  Button '%s' (%s)" % (button.name, button.color))
+        for i in range(5):
+            if button.button_gpio.is_pressed:
+                report(out_box, "    %i: Button is ON" %i)
+                sleep(1)
+            else:
+                report(out_box, "    %i: Button is OFF" %i)
+                sleep(1)
 
     report(out_box, "===== End Demo")
 
-def led_blink(led, out_box):
-    report(out_box, '===== LED Blinking', True)
+def leds_blink(leds, out_box):
+    report(out_box, '===== LEDs Blinking', True)
 
-    for i in range(4):
-        report(out_box, "    LED is ON")
-        led.on()
-        sleep(0.5)
-        report(out_box, "    LED is OFF")
-        led.off()
-        sleep(0.5)
+    for led in leds:
+        report(out_box, "  LED '%s'" % led.color)
+        report(out_box, "  blinking...")
+        led.blink(2)
+        
+        for i in range(2):
+            report(out_box, "    LED is ON")
+            led.on()
+            sleep(0.5)
+            report(out_box, "    LED is OFF")
+            led.off()
+            sleep(0.5)
 
     report(out_box, "===== End Demo")
 
 def led_by_button(button, led, out_box):
     report(out_box, '===== LED by button', True)
-
+    report(out_box, " press %s button" % button.color)
+    
     for i in range(6):
-        if button.is_pressed:
+        if button.is_pressed():
             led.on()
-            report(out_box, "    LED is ON")
+            report(out_box, "    %s LED is ON" % led.color)
             sleep(1)
         else:
             led.off()
-            report(out_box, "    LED is OFF")
+            report(out_box, "    %s LED is OFF" % led.color)
             sleep(1)
 
     led.off()

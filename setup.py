@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup (
        name='Rob',
-       version='0.1',
+       version='2.0',
        packages=find_packages(),
 
        # Declare your packages' dependencies here, for eg:

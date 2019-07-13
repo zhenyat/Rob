@@ -4,9 +4,10 @@
 #   Button Class on a base of GPIO Zero
 #
 #   Arguments:
-#       name  - Button Name
-#       color - Button Color
-#       gpio  - GPIO Pin Button connected to
+#       name    - Button Name
+#       color   - Button Color
+#       gpio    - GPIO Pin Button connected to
+#       factory - GPIO Pins Factory
 #
 #   10.07.2019  Created by:  zhenya
 ################################################################################
@@ -17,10 +18,13 @@ class Button():
         self.name  = name
         self.color = color
         self.gpio  = gpio
-        
-        GPIO.Button(self.gpio, pin_factory=factory)
 
-    def get(self):
-        print(self.name, self.color, self.gpio)
+        # Assigns GPIO pin to the Button
+        self.button_gpio = GPIO.Button(self.gpio, pin_factory=factory)
 
-#        self.button = GPIO.Button(config.button_gpio, pin_factory=config.factory)
+    def get_attr(self):
+        return(self.name, self.color, self.gpio)
+
+    def is_pressed(self):
+        if (self.button_gpio.is_pressed): return(True)
+        else:                             return(False)

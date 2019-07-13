@@ -1,24 +1,22 @@
 ################################################################################
 #   app_models.py
 #
-#   Generates GPIO Objects and adds
+#   Generates Models
 #
 #   23.06.2019  Created by: zhenya
-#   10.07.2017
+#   13.07.2017  Update for Models
 ################################################################################
-#import gpiozero as GPIO
-
-from   models.button import *
-from   models.host          import *
-from   models.led           import *
-from   models.motor         import *
-#from lib.tools import debug
+from  models.button import *
+from  models.host   import *
+from  models.led    import *
+from  models.motor  import *
+from  models.robot  import *
 
 class AppModels():
     def __init__(self, config):
         
         self.host = Host(config.addr, config.name, config.user)
-        print(self.host.factory)
+
         if (config.buttons):
             self.buttons = []
             for button in config.buttons:
@@ -28,21 +26,31 @@ class AppModels():
             self.leds    = []
             for led in config.leds:
                 self.leds.append(LED(led['color'], led['gpio'], self.host.factory))
- 
-        if (config.motors):
-            self.motors  = []
-            for motor in config.motors:
-                self.motors.append(Motor(motor['kind'], motor['forward_gpio'],
-                                         motor['backward_gpio'], motor['speed']))
 
-        print(self.motors[0].backward_gpio)
-#    if config.demo:
-#        self.button = GPIO.Button(config.button_gpio, pin_factory=config.factory)
-#        self.led    = GPIO.LED(config.led_gpio, pin_factory=config.factory)
-#
-#        self.motor_left  = GPIO.Motor(forward=config.motor_left_forward,  backward=config.motor_left_backward,  pin_factory=config.factory)
-#        self.motor_right = GPIO.Motor(forward=config.motor_right_forward, backward=config.motor_right_backward, pin_factory=config.factory)
-#        
-#    else:
-#        self.robot = GPIO.Robot(left=(config.motor_left_forward,   config.motor_left_backward),
-#                                right=(config.motor_right_forward, config.motor_right_backward), pin_factory=config.factory)
+            self.colorize_leds()
+            
+        if (config.demo):
+            if (config.motors):
+                motors  = []
+                for motor in config.motors:
+                    motors.append(Motor(motor['kind'], motor['forward_gpio'],
+                                             motor['backward_gpio'], motor['speed'], self.host.factory))
+                self.nominate_motors(motors)
+        else:
+            self.robot = Robot(config.motors, self.host.factory)
+
+    def colorize_leds(self):
+        for led in self.leds:
+            if   led.color == 'red':    self.led_red    = led
+            elif led.color == 'green':  self.led_green  = led
+            elif led.color == 'blue':   self.led_blue   = led
+            elif led.color == 'yellow': self.led_yellow = led
+            elif led.color == 'white':  self.led_white  = led
+
+    def nominate_motors(self, motors):
+        for motor in motors:
+            if motor.kind == 'left':
+                self.motor_left  = motor.motor_gpio
+            else:
+                self.motor_right = motor.motor_gpio
+        self.motor_speed = motors[0].speed

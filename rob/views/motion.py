@@ -6,16 +6,16 @@
 #   23.06.2019  Created by: zhenya
 ################################################################################
 from tkinter import *
+import controllers.motion as motion
 
-import controllers.motion as robby
+from lib.tools import *
 
-class RobotView():
-    def __init__(self, master, config, models):
+class MotionView():
+    def __init__(self, master, models):
         self.master = master
-        self.config = config
         
         # Default attribures
-        self.master.title('Raspberry Pi Robot: ' + config.host_addr)
+        self.master.title('Raspberry Pi Robot: ' + models.host.addr)
         self.master.geometry(self.center())
         self.master.attributes("-topmost", True)         # Place master over all other windows
         self.master.config(background = 'lightyellow')
@@ -26,14 +26,14 @@ class RobotView():
         ###     Robot motion
         motion_frame = LabelFrame(master, text='Robot Motion', width=400, height=50, background='lightblue', bd=2, labelanchor=N)
         motion_frame.grid(row=0)
-        
-        # Button Ex.
-        button_square_motion = Button(motion_frame, text='Square', highlightbackground ="blue", command=lambda: robby.square_motion(models.robot, config.motor_speed, log_box))
-        button_square_motion.grid(row=0, column=1, columnspan = 3, sticky=W)
 
-        # Ciurses Ex.
-        button_ciurses = Button(motion_frame, text='Keypad', highlightbackground ="blue", command=lambda: robby.keyboard_warning(log_box))
-        button_ciurses.grid(row=0, column=4,  columnspan = 3, sticky=N)
+        # Button Ex.
+        button_square_motion = Button(motion_frame, text='Bi-direct', highlightbackground ="blue", command=lambda: motion.bidirection_motion(models.robot, models.robot.motors_speed, log_box))
+        button_square_motion.grid(row=0, column=1, columnspan = 4, sticky=W)
+
+#        # Ciurses Ex.
+#        button_ciurses = Button(motion_frame, text='Keypad', highlightbackground ="blue", command=lambda: motion.keyboard_warning(log_box))
+#        button_ciurses.grid(row=0, column=4,  columnspan = 3, sticky=N)
 #
 #        # Button for LED Ex.
 #        button_for_led = Button(demo_frame, text='Button & LED', highlightbackground ="blue", command=lambda: gpio.led_by_button(models.button, models.led, log_box))

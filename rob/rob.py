@@ -15,6 +15,6 @@ if __name__ == "__main__":
         
     app = Application()
 
-#    app.root.mainloop()
+    app.root.mainloop()
   
     log("App is over")

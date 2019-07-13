@@ -13,24 +13,22 @@ import pigpio
 
 from   lib.tools import *
 
-def keyboard_warning(out_box):
-    text = 'Attention! Robot control by keys to be done in CLI only\n\n Run file: bin/motion_by_keys'
-    report(out_box, text, True)
-
-def square_motion(robot, speed, out_box):
+def bidirection_motion(robot, speed, out_box):
     report(out_box, '===== Square Motion', True)
     
     pi = pigpio.pi('192.168.2.44')
     
     for i in range(4):
         robot.forward(speed)
-        report(out_box, '   On pin: %d | %d' % (pi.read(19), pi.read(16)))
-        report(out_box, '      Forward...')
+        report(out_box, '   On Left Motor pins (fwd/bwd): %d | %d - Forward' % (pi.read(19), pi.read(16)))
         sleep(1)
         robot.backward(speed)
-        report(out_box, '   On pin: %d | %d' % (pi.read(19), pi.read(16)))
-        report(out_box, '      Back...')
+        report(out_box, '   On Left Motor pins (fwd/bwd): %d | %d - Backward' % (pi.read(19), pi.read(16)))
         sleep(1)
 
     robot.stop()
     report(out_box, "===== End Motion")
+
+def keyboard_warning(out_box):
+    text = 'Attention! Robot control by keys to be done in CLI only\n\n Run file: bin/motion_by_keys'
+    report(out_box, text, True)
