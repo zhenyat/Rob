@@ -3,10 +3,15 @@
 #   Curses Test with Robot
 
 import curses 
-from   gpiozero import Robot
-from time import sleep
+import gpiozero             as GPIO
+from   gpiozero.pins.pigpio import PiGPIOFactory
+from   time                 import sleep
 
-robot = Robot(left=(19, 16), right=(22, 23))
+addr = '192.168.2.44'
+factory = PiGPIOFactory(host=addr)
+GPIO.Device.pin_factory = factory         # Workaround: MUST BE!!!
+
+robot = GPIO.Robot(left=(19, 16), right=(22, 23), pin_factory=factory)
 speed = 1
 
 # Init curses and set it up

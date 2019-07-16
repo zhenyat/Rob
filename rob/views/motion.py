@@ -32,8 +32,8 @@ class MotionView():
         button_square_motion.grid(row=0, column=1, columnspan = 4, sticky=W)
 
 #        # Ciurses Ex.
-#        button_ciurses = Button(motion_frame, text='Keypad', highlightbackground ="blue", command=lambda: motion.keyboard_warning(log_box))
-#        button_ciurses.grid(row=0, column=4,  columnspan = 3, sticky=N)
+        button_ciurses = Button(motion_frame, text='Keypad', highlightbackground ="blue", command=lambda: motion.keyboard_warning(log_box))
+        button_ciurses.grid(row=0, column=4,  columnspan = 3, sticky=N)
 #
 #        # Button for LED Ex.
 #        button_for_led = Button(demo_frame, text='Button & LED', highlightbackground ="blue", command=lambda: gpio.led_by_button(models.button, models.led, log_box))

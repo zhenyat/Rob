@@ -10,9 +10,6 @@
 #
 #   10.07.2019  Created by:  zhenya
 ################################################################################
-import os
-import sys
-
 import gpiozero             as     GPIO
 from   gpiozero.pins.pigpio import PiGPIOFactory
 

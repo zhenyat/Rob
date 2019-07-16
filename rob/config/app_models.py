@@ -33,7 +33,7 @@ class AppModels():
             if (config.motors):
                 motors  = []
                 for motor in config.motors:
-                    motors.append(Motor(motor['kind'], motor['forward_gpio'],
+                    motors.append(Motor(motor['side'], motor['forward_gpio'],
                                              motor['backward_gpio'], motor['speed'], self.host.factory))
                 self.nominate_motors(motors)
         else:
@@ -49,7 +49,7 @@ class AppModels():
 
     def nominate_motors(self, motors):
         for motor in motors:
-            if motor.kind == 'left':
+            if motor.side == 'left':
                 self.motor_left  = motor.motor_gpio
             else:
                 self.motor_right = motor.motor_gpio

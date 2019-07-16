@@ -15,7 +15,7 @@ class Robot():
     def __init__(self, motors, factory):
 
         for motor in motors:
-            if motor['kind'] == 'left':
+            if motor['side'] == 'left':
                 left_forward  = motor['forward_gpio']
                 left_backward = motor['backward_gpio']
             else:

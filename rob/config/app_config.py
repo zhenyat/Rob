@@ -79,7 +79,7 @@ class AppConfig():
 #
         if ('motors') in params:    self.motors = params['motors']
 #            for motor in params['motors']:
-#                self.motors.append(Motor(motor['kind'], motor['forward_gpio'],
+#                self.motors.append(Motor(motor['side'], motor['forward_gpio'],
 #                                         motor['backward_gpio'], motor['speed']))
         else:
             log('No Motors to be initialized')
@@ -88,7 +88,7 @@ class AppConfig():
 #    def initialize_motors(self, params):
 #        if ('motors') in params:
 #            for motor in params[motors]:
-#               self.motors.append(Button(motor['kind'], motor['forward_gpio'],
+#               self.motors.append(Button(motor['side'], motor['forward_gpio'],
 #                                         motor['backward_gpio'], motor['speed'])) 
 #        else:
 #            log('No Motors to be initialized')

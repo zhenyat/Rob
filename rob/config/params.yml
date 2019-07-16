@@ -12,7 +12,7 @@ host:
 
 # Modes
 debug:                  True
-demo:                   True
+demo:                   False
 
 # Models
 buttons:
@@ -33,12 +33,12 @@ leds:
         gpio:            26
 motors:
     -
-        kind:               left
+        side:               left
         forward_gpio:       19
         backward_gpio:      16
         speed:              1.0
     -
-        kind:               right
+        side:               right
         forward_gpio:       22
         backward_gpio:      23
         speed:              1.0
