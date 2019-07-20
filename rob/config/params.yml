@@ -2,7 +2,7 @@
 #   Input file for App configuration
 #
 #   22.06.2019  Created by: zhenya
-#   10.07.2019  Update: new data structure of LEDs & Buttons
+#   10.07.2019  New data structure of LEDs & Buttons
 ###############################################################
 host:
     addr:               '192.168.2.44'
@@ -12,7 +12,7 @@ host:
 
 # Modes
 debug:                  True
-demo:                   False
+demo:                   True
 
 # Models
 buttons:
@@ -33,15 +33,15 @@ leds:
         gpio:            26
 motors:
     -
-        side:               left
-        forward_gpio:       19
-        backward_gpio:      16
-        speed:              1.0
+        side:           left
+        forward_gpio:   19
+        backward_gpio:  16
+        speed:          0.8
     -
-        side:               right
-        forward_gpio:       22
-        backward_gpio:      23
-        speed:              0.5
+        side:           right
+        forward_gpio:   22
+        backward_gpio:  23
+        speed:          0.8
 
 pigpio:
     gpio:               27

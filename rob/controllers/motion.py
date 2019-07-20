@@ -2,7 +2,7 @@
 #   motion.py
 #
 #   export TERM=linux
-#export TERMINFO=/etc/terminfo
+#   export TERMINFO=/etc/terminfo
 #   Robot motion function
 #
 #   23.06.2019  Created by: zhenya

@@ -4,11 +4,11 @@
 #   View: Robot motion
 #
 #   23.06.2019  Created by: zhenya
+#   20.07.2019  Updated for logo (mainloop() must be here!)
 ################################################################################
-from tkinter import *
-import controllers.motion as motion
-
-from lib.tools import *
+from   tkinter            import *
+import controllers.motion as     motion
+from   lib.tools          import *
 
 class MotionView():
     def __init__(self, master, models):
@@ -27,14 +27,19 @@ class MotionView():
         motion_frame = LabelFrame(master, text='Robot Motion', width=400, height=50, background='lightblue', bd=2, labelanchor=N)
         motion_frame.grid(row=0)
 
+        # Logo
+        logo = get_logo('images/logo.png', size=25)
+#       logo = get_gif_logo('images/logo.gif', factor=10)
+        Label(motion_frame, image=logo).grid(row=0, column=0, sticky=N)
+        
         # Button Ex.
         button_square_motion = Button(motion_frame, text='Bi-direct', highlightbackground ="blue", command=lambda: motion.bidirection_motion(models.robot, models.robot.motors_speed, log_box))
-        button_square_motion.grid(row=0, column=1, columnspan = 4, sticky=W)
+        button_square_motion.grid(row=0, column=1, columnspan = 5, sticky=W)
 
-#        # Ciurses Ex.
+        # Ciurses Ex.
         button_ciurses = Button(motion_frame, text='Keypad', highlightbackground ="blue", command=lambda: motion.keyboard_warning(log_box))
-        button_ciurses.grid(row=0, column=4,  columnspan = 3, sticky=N)
-#
+        button_ciurses.grid(row=0, column=5, columnspan = 4, sticky=N)
+        
 #        # Button for LED Ex.
 #        button_for_led = Button(demo_frame, text='Button & LED', highlightbackground ="blue", command=lambda: gpio.led_by_button(models.button, models.led, log_box))
 #        button_for_led.grid(row=0, column=7, columnspan = 5, sticky=W)
@@ -56,6 +61,8 @@ class MotionView():
 
         self.quit_button  = Button(self.bottom_frame, text="Quit", highlightbackground ="grey", command=quit)
         self.quit_button.grid(row=0, column=0)
+
+        self.master.mainloop()
 
     # Locates GUI (View) window in the center of a screen
     def center(self):

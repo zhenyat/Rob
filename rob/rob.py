@@ -3,7 +3,6 @@
 #   rob.py
 #
 #   Main App Module
-
 #
 #   22.06.2019  Created by: zhenya
 ################################################################################
@@ -15,6 +14,6 @@ if __name__ == "__main__":
         
     app = Application()
 
-    app.root.mainloop()
-  
+#   self.root.mainloop()   # Moved to Views (cause of adding logo picture)
+
     log("App is over")

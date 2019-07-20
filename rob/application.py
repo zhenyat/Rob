@@ -17,9 +17,8 @@ class Application:
         config = AppConfig()
         models = AppModels(config)
         self.root = Tk()
-        
+
         if config.demo:
             DemoView(self.root, models)
         else:
             MotionView(self.root, models)
-            
