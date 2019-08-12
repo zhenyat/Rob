@@ -8,6 +8,7 @@
 #   22.06.2019  Created by: zhenya
 #   10.07.2019  New data structure of LEDs, Buttons, etc
 #   20.07.2019  Models & Code cleaning
+#   11.07.2019  Rada's update
 ################################################################################
 import os
 import sys
@@ -26,15 +27,18 @@ class AppConfig():
         self.initialize_models(params)
         self.initialize_others(params)
                 
-    # Reads yml-file with input data
+    # Reads yml-file with input data (updated by Rada)
     def read_values(self, file_name='config/params.yml'):
-        with open(file_name, 'r') as stream:
-            try:
-                return(yaml.safe_load(stream))          # Return Dictionary
-            except yaml.YAMLError as error_message:
-                log(error_message)
-                sys.exit("Failed to read params")
-
+       try:
+           with open(file_name, 'r') as stream:
+               return(yaml.safe_load(stream))       # Return Dictionary
+       except OSError as error_message:
+               log(error_message)
+               sys.exit('File not found: ' + file_name)
+       except yaml.YAMLError as error_message:
+               log(error_message)
+               sys.exit('Failed to read params')
+               
     # Initializes Host according to yml-data
     def initialize_host(self, params):
         self.addr = params['host']['addr']
