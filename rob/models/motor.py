@@ -1,23 +1,19 @@
 ################################################################################
 #   motor.py
 #
-#   Motor Class on a base of GPIO Zero
+#   Motor class inheriting GPIO Zero Motor class
 #
-#   Arguments:
-#       side          - Left / Right Motor
-#       forward_gpio  - Forward GPIO Pin connected to
-#       backward_gpio - Forward GPIO Pin connected to
-#       speed         - Motor speed    
+#   Ref:    gpiozero_1.5.0.pdf, p. 120
 #
-#   13.07.2019  Created by:  zhenya
+#   Child class arguments:
+#       color   - Motor Color
+#
+#   22.09.2019  Created by:  zhenya
 ################################################################################
-import gpiozero as GPIO
+import gpiozero
 
-class Motor():
-    def __init__(self, side, forward_gpio, backward_gpio, speed, factory):
-        self.side          = side
-        self.forward_gpio  = forward_gpio
-        self.backward_gpio = backward_gpio
-        self.speed         = speed
-
-        self.motor_gpio  = GPIO.Motor(forward=self.forward_gpio, backward=self.backward_gpio, pin_factory=factory)
+class Motor(gpiozero.Motor):
+    def __init__(self, forward_gpio, backward_gpio, pin_factory, side, speed):
+        self.side  = side
+        self.speed = speed 
+        super().__init__(forward=forward_gpio, backward=backward_gpio, pin_factory=pin_factory)

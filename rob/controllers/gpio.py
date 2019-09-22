@@ -5,6 +5,7 @@
 #
 #   22.06.2019  Created by: zhenya
 #   13.07.2019  Updated for Models
+#   22.09.2019  Corrected for inheritating models
 ################################################################################
 from   time      import sleep
 import pigpio
@@ -17,7 +18,7 @@ def button(buttons, out_box):
     for button in buttons:
         report(out_box, "  Button '%s' (%s)" % (button.name, button.color))
         for i in range(5):
-            if button.button_gpio.is_pressed:
+            if button.is_pressed:
                 report(out_box, "    %i: Button is ON" %i)
                 sleep(1)
             else:
@@ -49,7 +50,7 @@ def led_by_button(button, led, out_box):
     report(out_box, " press %s button" % button.color)
     
     for i in range(6):
-        if button.is_pressed():
+        if button.is_pressed:
             led.on()
             report(out_box, "    %s LED is ON" % led.color)
             sleep(1)
@@ -91,19 +92,20 @@ def motors(motor_left, motor_right, speed, out_box):
 #################################################
 #   Toggles voltage on a given GPIO pin
 #   For better demo-effect the LED pin to be used
+#
+#   22.09.2019  Updated with correct pin number attribute 9must be INT)
 #################################################
-def pigpio_toggle(host_addr, gpio_pin, out_box):
+def pigpio_toggle(host_addr, gpio_pin_number, out_box):
     report(out_box, '===== pigpio Lib Demo', True)
-
     pi = pigpio.pi(host_addr)
-
+    
     for i in range(4):
-        if pi.read(gpio_pin) == 0:
-            pi.write(gpio_pin, 1)
+        if pi.read(gpio_pin_number) == 0:
+            pi.write(gpio_pin_number, 1)
         else:
-            pi.write(gpio_pin, 0)
+            pi.write(gpio_pin_number, 0)
 
-        report(out_box, '   On pin: %d' % pi.read(gpio_pin))
+        report(out_box, '   On pin: %d' % pi.read(gpio_pin_number))
         sleep(2)
 
     report(out_box, "===== End Demo")

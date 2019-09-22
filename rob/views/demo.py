@@ -47,7 +47,7 @@ class DemoView():
         button_for_led.grid(row=0, column=8, columnspan = 5, sticky=W)
 
         # pigpio Ex.
-        button_pigpio = Button(demo_frame, text='pigpio', highlightbackground ="blue", command=lambda: gpio.pigpio_toggle(models.host.addr, models.led_yellow.gpio, log_box))
+        button_pigpio = Button(demo_frame, text='pigpio', highlightbackground ="blue", command=lambda: gpio.pigpio_toggle(models.host.addr, models.led_yellow.pin._number, log_box))
         button_pigpio.grid(row=0, column=13,  columnspan = 3, sticky=N)
 
         # Motors Ex.

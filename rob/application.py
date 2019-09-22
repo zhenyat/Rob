@@ -16,6 +16,7 @@ class Application:
         self.models = []
         config = AppConfig()
         models = AppModels(config)
+
         self.root = Tk()
 
         if config.demo:

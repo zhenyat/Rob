@@ -1,30 +1,21 @@
 ################################################################################
 #   button.py
 #
-#   Button Class on a base of GPIO Zero
+#   Button Class nheriting GPIO Zero LED class
 #
-#   Arguments:
-#       name    - Button Name
-#       color   - Button Color
-#       gpio    - GPIO Pin Button connected to
-#       factory - GPIO Pins Factory
+#   Ref:    gpiozero_1.5.0.pdf, p. 97
 #
-#   10.07.2019  Created by:  zhenya
-################################################################################
-import gpiozero as GPIO
+#   Child class arguments:
+#       name  - Button Name
+#       color - Button Color
 
-class Button():
-    def __init__(self, name, color, gpio, factory):
+#   22.09.2019  Created by:  zhenya
+################################################################################
+import gpiozero
+
+class Button(gpiozero.Button):
+    def __init__(self, gpio, pin_factory, name='Dummy', color='red'):
         self.name  = name
         self.color = color
-        self.gpio  = gpio
+        super().__init__(pin=gpio, pin_factory=pin_factory)
 
-        # Assigns GPIO pin to the Button
-        self.button_gpio = GPIO.Button(self.gpio, pin_factory=factory)
-
-    def get_attr(self):
-        return(self.name, self.color, self.gpio)
-
-    def is_pressed(self):
-        if (self.button_gpio.is_pressed): return(True)
-        else:                             return(False)

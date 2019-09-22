@@ -1,41 +1,18 @@
 ################################################################################
 #   led.py
 #
-#   LED Class on a base of GPIO Zero
+#   LED class inheriting GPIO Zero LED class
 #
-#   Arguments:
+#   Ref:    gpiozero_1.5.0.pdf, p. 115
+#
+#   Child class arguments:
 #       color   - LED Color
-#       gpio    - GPIO Pin LED connected to
-#       factory - GPIO Pins Factory
 #
-#   10.07.2019  Created by:  zhenya
+#   22.09.2019  Created by:  zhenya
 ################################################################################
-import gpiozero as GPIO
+import gpiozero
 
-class LED():
-    def __init__(self, color, gpio, factory):
-        self.color   = color
-        self.gpio    = gpio
-        self.factory = factory
-
-        # Assigns GPIO pin to the LED
-        self.led_gpio = GPIO.LED(self.gpio, pin_factory=self.factory)
-
-    def get_attr(self):
-        return(self.color, self.gpio)
-        
-    def is_color(self, color):
-        if self.color == color: return(True)
-        else:                   return(False)
-        
-    def blink(self, times=5):
-        self.led_gpio.blink(n=times, background=False)
-    
-    def off(self):
-        self.led_gpio.off()
-
-    def on(self):
-        self.led_gpio.on()
-        pass
-
-    
+class LED(gpiozero.LED):
+    def __init__(self, gpio, pin_factory, color='red'):
+        self.color = color
+        super().__init__(pin=gpio, pin_factory=pin_factory)

@@ -16,5 +16,4 @@ class ZtRPiGPIO():
         set_objects()
         
     def set_objects(self):
-        
-
+        pass

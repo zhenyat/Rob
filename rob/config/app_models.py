@@ -1,10 +1,11 @@
 ################################################################################
 #   app_models.py
 #
-#   Generates Models
+#   Generates Models Objects
 #
 #   23.06.2019  Created by: zhenya
 #   13.07.2017  Update for Models
+#   22.09.2019  Corrections done
 ################################################################################
 from  models.button import *
 from  models.host   import *
@@ -20,21 +21,21 @@ class AppModels():
         if (config.buttons):
             self.buttons = []
             for button in config.buttons:
-                self.buttons.append(Button(button['name'], button['color'], button['gpio'], self.host.factory))
+                self.buttons.append(Button(button['gpio'], self.host.factory, button['name'], button['color']))
 
         if (config.leds):
             self.leds    = []
             for led in config.leds:
-                self.leds.append(LED(led['color'], led['gpio'], self.host.factory))
+                self.leds.append(LED(led['gpio'], self.host.factory, led['color']))
 
             self.colorize_leds()
-            
+
         if (config.demo):
             if (config.motors):
                 motors  = []
                 for motor in config.motors:
-                    motors.append(Motor(motor['side'], motor['forward_gpio'],
-                                             motor['backward_gpio'], motor['speed'], self.host.factory))
+                    motors.append(Motor(motor['forward_gpio'], motor['backward_gpio'], 
+                                        self.host.factory, motor['side'], motor['speed']))
                 self.nominate_motors(motors)
         else:
             self.robot = Robot(config.motors, self.host.factory)
@@ -50,7 +51,7 @@ class AppModels():
     def nominate_motors(self, motors):
         for motor in motors:
             if motor.side == 'left':
-                self.motor_left  = motor.motor_gpio
+                self.motor_left  = motor
             else:
-                self.motor_right = motor.motor_gpio
+                self.motor_right = motor
         self.motor_speed = motors[0].speed
